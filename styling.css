@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta&display=swap');
+html{
+    height:100vh ;
+    /* background: radial-gradient(circle,white,#ccc); */
+    background-image: url(images/main.png);
+    background-repeat: repeat-x; 
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    margin:0px;
+}
+
+body{
+    height:100vh ;
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    margin:0px;
+}
+
+#menubar{
+    height: auto;
+    width: max-content;
+    align-self: center;
+    background: rgb(255, 175, 71);
+    padding: 1.2vw;
+    border: solid 0.7vw coral;
+    border-radius: 3vw;
+    transform: scale(2.3);
+    text-align: center;
+}
+
+#menubar div{
+    margin:1vw;
+    font-family: 'Lexend Zetta', sans-serif; 
+    font-size: 0.7vw;
+    background-color: wheat;
+    border: inset 0.2vw rgb(151, 90, 19);
+    border-radius: 10px;
+    padding: 0.4vw;
+}
+
+#menubar div:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+} 
+
+#menubar div:active{
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
+#container {
+    height: 98vh;
+    width: 98vw;
+    background-image:url(images/background.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;  
+    background-position: center; 
+    border-radius: 10px;
+    position:relative;
+    /* top:1vh;
+    left: 1.6vh;  */
+    /* cursor: url(images/apple.png),auto; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#score{
+    background: #e1ff1da2;
+    font-size: 1.5vw;
+    color: #3b4118;
+    padding: 1vh 1vw;
+    /* cursor: url(images/apple.png),auto; */
+    box-shadow:#4c5514 0 0.6vh 0.26vh;
+    position: absolute;
+    left: 88vw;
+    top:1.7vh;
+}
+
+/* #hscore{
+    background: #F1FF92;
+    width: max-content;
+    color: #888E5F;
+    padding:5px 10px;
+    box-shadow:#9da853 0px 4px 2px;
+    position: absolute;
+    top:48px;
+    display: none; */
+/* } */
+
+/* #correct{
+    position: absolute;
+    left:260px;
+    background-color: rgb(46, 226, 46);
+    color: white;
+    padding: 11px;
+    display: none;
+}
+
+#wrong{
+    position: absolute;
+    left:260px;
+    background-color: rgb(240, 28, 28);
+    color: white;
+    padding: 11px;
+    display: none;
+} */
+
+/* #question{
+    width:450px;
+    height:150px;
+    margin: 70px auto 10px auto;
+    background-color: #9da0ea;
+    box-shadow: #535aa8 0px 4px 2px;
+    font-size: 100px;
+    text-align: center;
+    font-family: 'Sriracha', cursive;
+    display: none;
+} */
+
+/* #instruction{
+    width:500px;
+    height: 50px;
+    font-size: 30px;
+    background-color: #b218d94d;
+    margin: 30px auto;
+    text-align: center;
+    line-height: 50px;
+} */
+
+/* #choices{
+    width: 450px;
+    height: 100px;
+    margin: 5px auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.box{
+    width:85px;
+    height: 85px;
+    background-color: white;
+    float: left;
+    flex-direction: row;
+    border-radius: 3px;
+    box-shadow: gray 0px 4px 2px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 85px;
+    transition: all 0.2s;
+    -moz-transition:all 0.2s ;
+    -webkit-transition:all 0.2s ;
+    -o-transition: all 0.2s;
+    -ms-transition:all 0.2s;
+    display: none;
+}
+
+.box:hover{
+    background-color: #9c89f6;
+    box-shadow: #6b54d3 0px 4px 2px;
+}
+
+.box:active{
+    box-shadow: #6b54d3 0px 0px 0px;
+    margin-top: 4px;
+}
+
+#startreset{
+    margin: 0px auto;
+    width: max-content;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: gray 0px 4px 2px;
+    padding: 10px;
+    transition: all 0.2s;
+    -moz-transition:all 0.2s ;
+    -webkit-transition:all 0.2s ;
+    -o-transition: all 0.2s;
+    -ms-transition:all 0.2s;
+    display: none;
+}
+
+#startreset:hover{
+    background-color: #9c89f6;
+    box-shadow: #6b54d3 0px 4px 2px;
+}
+
+#startreset:active{
+    box-shadow: none;
+    position: relative;
+    top:4px;
+} */
+#liferem{
+    position: absolute;
+    width: max-content;
+    padding:1.1vh;
+    /* padding-top: 0px; */
+    left: 20px;
+    /* cursor: url(images/apple.png),auto; */
+    top:1vh;
+    border-radius: 3px;
+    background-color: rgba(182, 255, 36, 0.63);
+    box-shadow: rgba(0, 0, 0,0.3) 0 1vh 0.2vh;
+    display: none;
+}
+
+/* 
+
+#set{
+    margin-left: 5px;
+    border-radius: 5px;
+} */
+
+/* #timereq{
+    background-color: rgba(199, 253, 117, 0.548);
+    margin-left: 5px;
+}
+
+label{
+    background-color: rgb(255, 32, 32);
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 4px;
+    margin-left: -10px;
+} */
+
+.heart{
+    height:2.5vh;
+    margin: 0.2vw;
+    position: relative;
+    top: 0.1vh;
+}
+
+#fruit{
+    height:auto;
+    z-index: 3;
+    width:7vw;
+    position: absolute;
+    /* display: none; */
+    /* cursor: url(images/apple.png),auto; */
+}
+
+#endgame{
+    display: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: max-content;
+    height: max-content;
+    font-size: 2vw;
+    color: rgb(21, 88, 21);
+    align-self: center;
+    background: rgb(255, 175, 71);
+    padding: 3vw;
+    border: solid 7px coral;
+    border-radius: 5px;
+    transform: scale(1.3);
+    text-align: center;
+}
+
+#fsc{
+    color: mediumblue;
+}
+
+#endgame div{
+    margin:1vw;
+    font-family: 'Lexend Zetta', sans-serif; 
+    font-size: 0.7vw;
+    background-color: wheat;
+    border: inset 0.2vw rgb(151, 90, 19);
+    border-radius: 10px;
+    padding: 0.4vw;
+}
+
+#endgame div:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+} 
+
+#endgame div:active{
+    cursor: pointer;
+    transform: scale(0.9);
+}
