@@ -5,7 +5,7 @@
     <title>Fruit Ninja</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="styling.min.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/trontastic/jquery-ui.css">
 </head>
 
@@ -40,22 +40,8 @@
     <script src='https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js'></script>
     <script src='https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js'></script>
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyAw2CIQwGddayi1XUY2Qlc7zZFB3hVburY",
-            authDomain: "fruit-ninja-cb70e.firebaseapp.com",
-            databaseURL: "https://fruit-ninja-cb70e-default-rtdb.firebaseio.com",
-            projectId: "fruit-ninja-cb70e",
-            storageBucket: "fruit-ninja-cb70e.appspot.com",
-            messagingSenderId: "58196438037",
-            appId: "1:58196438037:web:8930f8457c363fd472b21c",
-            measurementId: "G-E3MST60L29"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        var db = firebase.database();
-    </script>
-    <script src="jquery.js"></script>
+    <script src="firebase.min.js"></script>
+    <script src="jquery.min.js"></script>
 </body>
 
 </html>
