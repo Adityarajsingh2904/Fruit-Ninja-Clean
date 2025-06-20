@@ -53,7 +53,26 @@ $(function(){
     });
 });
 
-$("#fruit").mouseover(cut);
+// support both mouse and touch interactions for slicing the fruit
+$("#fruit").on("mouseover touchstart", cut);
+
+// Detect pointer or touch movement across the container and slice the fruit
+$("#container").on("mousemove touchmove", function(event) {
+    const x = event.pageX || event.touches?.[0]?.pageX;
+    const y = event.pageY || event.touches?.[0]?.pageY;
+    const fruit = $("#fruit");
+
+    if (fruit.is(":visible")) {
+        const offset = fruit.offset();
+        const w = fruit.width();
+        const h = fruit.height();
+
+        if (x >= offset.left && x <= offset.left + w &&
+            y >= offset.top && y <= offset.top + h) {
+            cut();
+        }
+    }
+});
 
 function addHeart(){
     $("#life").empty();
