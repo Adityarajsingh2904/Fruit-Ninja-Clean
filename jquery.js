@@ -53,7 +53,8 @@ $(function(){
     });
 });
 
-$("#fruit").mouseover(cut);
+// Use click and touchstart so audio playback is allowed by browser policies
+$("#fruit").on('click touchstart', cut);
 
 function addHeart(){
     $("#life").empty();
