@@ -4,6 +4,11 @@ var lives;
 var dropSpeed=1;
 var action;
 var highScore=0;
+var hits = 0;
+var totalSlices = 0;
+var difficulty = 1;
+var baseSpeed = 1;
+var baseDelay = 800;
 
 var fruits = ['apple', 'banana', 'grapes', 'mango', 'orange', 'peach', 'pear', 'pineapple','tomato','watermelon'];
 
@@ -94,35 +99,30 @@ function addHeart(){
     }
 }
 
-function startFruits(){
-    chooseFruit();
-    $("#fruit").css({'left' : Math.round(($("#container").width()-350)*Math.random())+200, 'top' : -50});
-    $("#fruit").css({'display':'flex'});
-    if(dropSpeed<=13){
-        dropSpeed+=1;
+function spawnNextFruit(){
+    totalSlices++;
+    if(totalSlices > 0 && hits / totalSlices > 0.9){
+        difficulty += 0.1;
     }
-    console.log("dropSpeed", dropSpeed)
+    dropSpeed = baseSpeed * difficulty;
+    chooseFruit();
+    $("#fruit").css({"left" : Math.round(($("#container").width()-350)*Math.random())+200, "top" : -50});
+    $("#fruit").css({"display":"flex"});
+}
+function startFruits(){
+    spawnNextFruit();
     action = setInterval(function(){
-        
-        $("#fruit").css('top', $("#fruit").position().top + dropSpeed);
+        $("#fruit").css("top", $("#fruit").position().top + dropSpeed);
         if($("#fruit").position().top > $("#container").height()){
-            
             if(lives > 1 ){
-                
-                $("#fruit").css({'display':'flex'});
-                chooseFruit();
-                $("#fruit").css({'left' : Math.round(($("#container").width()-350)*Math.random())+200, 'top' : -50});
-                
+                spawnNextFruit();
                 lives-=1;
-                
                 addHeart();
-                
-            }else{ 
-                playing = false;
-                $("#liferem").css('display','none');
+            }else{
+                isPlaying = false;
+                $("#liferem").css("display","none");
                 $("#fsc").text(score);
                 lives-=1;
-                
                 addHeart();
                 $("#endgame").show();
                 stopAction();
@@ -130,6 +130,7 @@ function startFruits(){
         }
     },10)
 }
+
 
 function chooseFruit(){
     $("#fruit").attr('src' , 'images/' + fruits[Math.round(9*Math.random())] +'.png');
@@ -146,11 +147,12 @@ function stopAction(){
 
 function cut(){
     score++;
+    hits++;
     $("#value").html(score);
     $("#slicesound")[0].play();
     $("#fruit").hide("explode", 500); 
     $("#fruit").css({'display':'flex'});
     clearInterval(action);
     
-    setTimeout(startFruits, 800);
+    setTimeout(startFruits, baseDelay / difficulty);
 }
