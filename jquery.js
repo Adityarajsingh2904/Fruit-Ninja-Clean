@@ -58,7 +58,7 @@ $("#fruit").on('click touchstart', cut);
 
 function addHeart(){
     $("#life").empty();
-    for(i=0;i<lives;i++){
+    for (var i = 0; i < lives; i++) {
         $("#life").append(`<img src="images/heart.png" class="heart">`);
     }
 }
@@ -86,8 +86,8 @@ function startFruits(){
                 
                 addHeart();
                 
-            }else{ 
-                playing = false;
+            } else {
+                isPlaying = false;
                 $("#liferem").css('display','none');
                 $("#fsc").text(score);
                 lives-=1;
