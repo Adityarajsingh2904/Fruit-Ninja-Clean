@@ -1,0 +1,15 @@
+name: Lint HTML Game
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint HTML
+        run: |
+          npx htmlhint index.html
+          npx stylelint styling.css
+          npx eslint jquery.js --env browser
+
