@@ -53,7 +53,7 @@ $(function(){
     });
 });
 
-// Use click and touchstart so audio playback is allowed by browser policies
+// Play slice sound only after a user gesture
 $("#fruit").on('click touchstart', cut);
 
 function addHeart(){
