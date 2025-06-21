@@ -26,7 +26,7 @@ var GameManager = (function () {
                     lives -= 1;
                     addHeart();
                 } else {
-                    playing = false;
+                    isPlaying = false;
                     $("#liferem").css('display', 'none');
                     $("#fsc").text(score);
                     lives -= 1;
