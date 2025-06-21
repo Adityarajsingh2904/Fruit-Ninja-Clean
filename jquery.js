@@ -8,21 +8,24 @@ var highScore=0;
 var fruits = ['apple', 'banana', 'grapes', 'mango', 'orange', 'peach', 'pear', 'pineapple','tomato','watermelon'];
 
 function getHighScore() {
-    var dbRef = db.ref().child("scores");
-    dbRef.on('value', (snapshot) => {
-        const data = snapshot.val();
-        if(data!=null){
-            highScore=data;
-        }
-    });
+    const stored = localStorage.getItem('highScore');
+    if(stored !== null){
+        highScore = parseInt(stored);
+    }
 }
 
 function showHighScore(){
     window.alert("High Score: "+highScore);
 }
 
-$(function(){    
+function updateHighScoreDisplay(){
+    $("#hsValueMenu").text(highScore);
+    $("#hsValueGameOver").text(highScore);
+}
+
+$(function(){
     getHighScore();
+    updateHighScoreDisplay();
 
     $("#highScore").click(function(){
         showHighScore();
@@ -106,8 +109,9 @@ function chooseFruit(){
 function stopAction(){
     if(score>highScore){
         highScore=score;
-        db.ref().child("scores").set(highScore);
+        localStorage.setItem('highScore', highScore);
     }
+    updateHighScoreDisplay();
     clearInterval(action);
     $("#fruit").hide();
 }
