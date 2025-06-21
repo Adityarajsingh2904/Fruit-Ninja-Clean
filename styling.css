@@ -4,7 +4,7 @@ html{
     height:100vh ;
     /* background: radial-gradient(circle,white,#ccc); */
     background-image: url(images/main.png);
-    background-repeat: repeat-x; 
+    background-repeat: repeat-x;
     background-size: 100% 100%;
     display: flex;
     justify-content: space-evenly;
@@ -37,7 +37,7 @@ body{
 
 #menubar div{
     margin:1vw;
-    font-family: 'Lexend Zetta', sans-serif; 
+    font-family: 'Lexend Zetta', sans-serif;
     font-size: 0.7vw;
     background-color: wheat;
     border: inset 0.2vw rgb(151, 90, 19);
@@ -48,7 +48,7 @@ body{
 #menubar div:hover{
     cursor: pointer;
     transform: scale(1.1);
-} 
+}
 
 #menubar div:active{
     cursor: pointer;
@@ -72,8 +72,8 @@ body{
     background-image:url(images/background.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-attachment: scroll;  
-    background-position: center; 
+    background-attachment: scroll;
+    background-position: center;
     border-radius: 10px;
     position:relative;
     /* top:1vh;
@@ -225,7 +225,7 @@ body{
     display: none;
 }
 
-/* 
+/*
 
 #set{
     margin-left: 5px;
@@ -283,7 +283,7 @@ label{
 
 #endgame div{
     margin:1vw;
-    font-family: 'Lexend Zetta', sans-serif; 
+    font-family: 'Lexend Zetta', sans-serif;
     font-size: 0.7vw;
     background-color: wheat;
     border: inset 0.2vw rgb(151, 90, 19);
@@ -294,7 +294,7 @@ label{
 #endgame div:hover{
     cursor: pointer;
     transform: scale(1.1);
-} 
+}
 
 #endgame div:active{
     cursor: pointer;

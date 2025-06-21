@@ -40,7 +40,7 @@ $(function(){
             startFruits();
         }
     });
-    
+
     $("#restart").click(function(){
         location.reload();
     });
@@ -63,26 +63,26 @@ function startFruits(){
         dropSpeed+=1;
     }
     action = setInterval(function(){
-        
+
         $("#fruit").css('top', $("#fruit").position().top + dropSpeed);
         if($("#fruit").position().top > $("#container").height()){
-            
+
             if(lives > 1 ){
-                
+
                 $("#fruit").css({'display':'flex'});
                 chooseFruit();
                 $("#fruit").css({'left' : Math.round(($("#container").width()-350)*Math.random())+200, 'top' : -50});
-                
+
                 lives-=1;
-                
+
                 addHeart();
-                
-            }else{ 
+
+            }else{
                 isPlaying = false;
                 $("#liferem").css('display','none');
                 $("#fsc").text(score);
                 lives-=1;
-                
+
                 addHeart();
                 $("#endgame").show();
                 stopAction();
@@ -109,9 +109,9 @@ function cut(){
     score++;
     $("#value").html(score);
     $("#slicesound")[0].play();
-    $("#fruit").hide("explode", 500); 
+    $("#fruit").hide("explode", 500);
     $("#fruit").css({'display':'flex'});
     clearInterval(action);
-    
+
     setTimeout(startFruits, 800);
 }
