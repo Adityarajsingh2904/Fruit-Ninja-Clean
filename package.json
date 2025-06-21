@@ -1,0 +1,12 @@
+{
+  "name": "fruit-ninja",
+  "version": "1.0.0",
+  "description": "Fruit Ninja clone using jQuery and Firebase",
+  "scripts": {
+    "start": "http-server -a localhost -p 8080 -c-1",
+    "test": "echo \"No tests specified\""
+  },
+  "devDependencies": {
+    "http-server": "^14.1.0"
+  }
+}
