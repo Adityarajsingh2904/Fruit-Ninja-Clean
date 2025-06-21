@@ -13,7 +13,6 @@ var GameManager = (function () {
         if (dropSpeed <= 13) {
             dropSpeed += 1;
         }
-        console.log("dropSpeed", dropSpeed);
         action = setInterval(function () {
             $("#fruit").css('top', $("#fruit").position().top + dropSpeed);
             if ($("#fruit").position().top > $("#container").height()) {
