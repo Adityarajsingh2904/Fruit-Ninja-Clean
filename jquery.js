@@ -21,6 +21,20 @@ function showHighScore(){
     window.alert("High Score: "+highScore);
 }
 
+function startGame(){
+    isPlaying=true;
+    score=0;
+    dropSpeed=1;
+    $("#value").html(score);
+    $("#menubar").hide();
+    $("#endgame").hide();
+    $("#liferem").css("display","flex");
+    $("#container").css({"display":"flex"});
+    lives=3;
+    addHeart();
+    startFruits();
+}
+
 $(function(){    
     getHighScore();
 
@@ -34,20 +48,15 @@ $(function(){
     $("#start").click(function(){
         if(isPlaying==true){
             location.reload();
-        }
-        else{
-            isPlaying=true;
-            score=0;
-            $("#value").html(score);
-            $("#menubar").hide();
-            $("#liferem").css('display','flex');
-            $("#container").css({'display':'flex'});
-            lives=3;
-            addHeart();
-            startFruits();
+        } else {
+            startGame();
         }
     });
     
+    $("#restartGame").click(function(){
+        startGame();
+    });
+
     $("#restart").click(function(){
         location.reload();
     });
