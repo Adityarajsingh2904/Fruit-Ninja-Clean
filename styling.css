@@ -1,5 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta&display=swap');
+:root {
+    --color-bg-main: rgb(255, 175, 71);
+    --color-border-main: coral;
+    --color-btn-bg: wheat;
+    --color-btn-border: rgb(151, 90, 19);
+    --color-score-bg: #e1ff1da2;
+    --color-score-text: #3b4118;
+    --color-shadow: #4c5514;
+    --color-endgame-text: rgb(21, 88, 21);
+    --color-life-bg: rgba(182, 255, 36, 0.63);
+    --color-life-shadow: rgba(0, 0, 0,0.3);
+    --color-fsc: mediumblue;
+}
+
+body.dark {
+    --color-bg-main: #333;
+    --color-border-main: #888;
+    --color-btn-bg: #555;
+    --color-btn-border: #aaa;
+    --color-score-bg: rgba(0,0,0,0.5);
+    --color-score-text: #eee;
+    --color-shadow: #000;
+    --color-endgame-text: #eee;
+    --color-life-bg: rgba(100,100,100,0.6);
+    --color-life-shadow: rgba(0,0,0,0.8);
+    --color-fsc: #00bfff;
+    color: #f0f0f0;
+    background-color: #111;
+}
 html{
     height:100vh ;
     /* background: radial-gradient(circle,white,#ccc); */
@@ -27,9 +56,9 @@ body{
     height: auto;
     width: max-content;
     align-self: center;
-    background: rgb(255, 175, 71);
+    background: var(--color-bg-main);
     padding: 1.2vw;
-    border: solid 0.7vw coral;
+    border: solid 0.7vw var(--color-border-main);
     border-radius: 3vw;
     transform: scale(2.3);
     text-align: center;
@@ -39,8 +68,8 @@ body{
     margin:1vw;
     font-family: 'Lexend Zetta', sans-serif; 
     font-size: 0.7vw;
-    background-color: wheat;
-    border: inset 0.2vw rgb(151, 90, 19);
+    background-color: var(--color-btn-bg);
+    border: inset 0.2vw var(--color-btn-border);
     border-radius: 10px;
     padding: 0.4vw;
 }
@@ -76,12 +105,12 @@ body{
 }
 
 #score{
-    background: #e1ff1da2;
+    background: var(--color-score-bg);
     font-size: 1.5vw;
-    color: #3b4118;
+    color: var(--color-score-text);
     padding: 1vh 1vw;
     /* cursor: url(images/apple.png),auto; */
-    box-shadow:#4c5514 0 0.6vh 0.26vh;
+    box-shadow:var(--color-shadow) 0 0.6vh 0.26vh;
     position: absolute;
     left: 88vw;
     top:1.7vh;
@@ -209,8 +238,8 @@ body{
     /* cursor: url(images/apple.png),auto; */
     top:1vh;
     border-radius: 3px;
-    background-color: rgba(182, 255, 36, 0.63);
-    box-shadow: rgba(0, 0, 0,0.3) 0 1vh 0.2vh;
+    background-color: var(--color-life-bg);
+    box-shadow: var(--color-life-shadow) 0 1vh 0.2vh;
     display: none;
 }
 
@@ -256,26 +285,26 @@ label{
     width: max-content;
     height: max-content;
     font-size: 2vw;
-    color: rgb(21, 88, 21);
+    color: var(--color-endgame-text);
     align-self: center;
-    background: rgb(255, 175, 71);
+    background: var(--color-bg-main);
     padding: 3vw;
-    border: solid 7px coral;
+    border: solid 7px var(--color-border-main);
     border-radius: 5px;
     transform: scale(1.3);
     text-align: center;
 }
 
 #fsc{
-    color: mediumblue;
+    color: var(--color-fsc);
 }
 
 #endgame div{
     margin:1vw;
     font-family: 'Lexend Zetta', sans-serif; 
     font-size: 0.7vw;
-    background-color: wheat;
-    border: inset 0.2vw rgb(151, 90, 19);
+    background-color: var(--color-btn-bg);
+    border: inset 0.2vw var(--color-btn-border);
     border-radius: 10px;
     padding: 0.4vw;
 }
@@ -288,4 +317,27 @@ label{
 #endgame div:active{
     cursor: pointer;
     transform: scale(0.9);
+}
+
+@media (max-width: 600px) {
+    #menubar{
+        transform: scale(1);
+    }
+    #menubar div{
+        font-size: 3.5vw;
+        padding: 1vw;
+    }
+    #score{
+        font-size: 4vw;
+        left: auto;
+        right: 2vw;
+    }
+    #endgame{
+        font-size: 4vw;
+        transform: scale(1);
+        padding: 5vw;
+    }
+    #endgame div{
+        font-size: 3.5vw;
+    }
 }

@@ -51,6 +51,10 @@ $(function(){
     $("#restart").click(function(){
         location.reload();
     });
+
+    $("#toggleDark").click(function(){
+        $("body").toggleClass("dark");
+    });
 });
 
 $("#fruit").mouseover(cut);
