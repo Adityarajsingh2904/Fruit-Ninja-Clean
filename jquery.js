@@ -9,13 +9,11 @@ var fruits = ['apple', 'banana', 'grapes', 'mango', 'orange', 'peach', 'pear', '
 
 function getHighScore() {
     const stored = localStorage.getItem('highScore');
-    if(stored !== null){
+    if(stored !== null && !isNaN(parseInt(stored))) {
         highScore = parseInt(stored);
+    } else {
+        highScore = 0;
     }
-}
-
-function showHighScore(){
-    window.alert("High Score: "+highScore);
 }
 
 function updateHighScoreDisplay(){
@@ -26,14 +24,6 @@ function updateHighScoreDisplay(){
 $(function(){
     getHighScore();
     updateHighScoreDisplay();
-
-    $("#highScore").click(function(){
-        showHighScore();
-    });
-    $("#highScore1").click(function(){
-        showHighScore();
-    });
-
     $("#start").click(function(){
         if(isPlaying==true){
             location.reload();
@@ -89,7 +79,7 @@ function startFruits(){
                 addHeart();
                 
             }else{ 
-                playing = false;
+                isPlaying = false;
                 $("#liferem").css('display','none');
                 $("#fsc").text(score);
                 lives-=1;
