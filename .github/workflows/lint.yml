@@ -7,9 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install linters
+        run: npm install -g htmlhint stylelint eslint
       - name: Lint HTML
         run: |
-          npx htmlhint index.html
-          npx stylelint styling.css
-          npx eslint jquery.js --env browser
+          htmlhint index.html
+          stylelint styling.css
+          eslint jquery.js --env browser
 
