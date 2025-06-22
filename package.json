@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Fruit Ninja game using HTML, CSS and JavaScript",
   "scripts": {
-    "start": "http-server -p 8080",
-    "test": "echo \"No test specified\" && exit 1"
+    "start": "parcel index.html",
+    "test": "echo \"No test specified\" && exit 1",
+    "lint": "eslint .",
+    "build": "parcel build index.html"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
