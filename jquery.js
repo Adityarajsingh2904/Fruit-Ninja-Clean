@@ -30,73 +30,75 @@ function startGame(){
     isPlaying=true;
     score=0;
     dropSpeed=1;
-    $("#value").html(score);
-    $("#menubar").hide();
-    $("#endgame").hide();
-    $("#liferem").css("display","flex");
-    $("#container").css({"display":"flex"});
+    document.getElementById("value").textContent = score;
+    document.getElementById("menubar").style.display = "none";
+    document.getElementById("endgame").style.display = "none";
+    document.getElementById("liferem").style.display = "flex";
+    document.getElementById("container").style.display = "flex";
     lives=3;
     addHeart();
     startFruits();
 }
 
-$(function(){    
+document.addEventListener('DOMContentLoaded', function(){
     getHighScore();
 
-    $("#highScore").click(function(){
-        showHighScore();
-    });
-    $("#highScore1").click(function(){
-        showHighScore();
-    });
+    document.getElementById("highScore").addEventListener('click', showHighScore);
+    document.getElementById("highScore1").addEventListener('click', showHighScore);
 
-    $("#start").click(function(){
+    document.getElementById("start").addEventListener('click', function(){
         if(isPlaying==true){
             location.reload();
         } else {
             startGame();
         }
     });
-    
-    $("#restartGame").click(function(){
-        startGame();
-    });
 
-    $("#restart").click(function(){
+    document.getElementById("restartGame").addEventListener('click', startGame);
+
+    document.getElementById("restart").addEventListener('click', function(){
         location.reload();
     });
 
-    $("#toggleDark").click(function(){
-        $("body").toggleClass("dark");
+    document.getElementById("toggleDark").addEventListener('click', function(){
+        document.body.classList.toggle('dark');
     });
-});
 
-// support both mouse and touch interactions for slicing the fruit
-$("#fruit").on("mouseover touchstart", cut);
+    // support both mouse and touch interactions for slicing the fruit
+    const fruitEl = document.getElementById("fruit");
+    fruitEl.addEventListener('mouseover', cut);
+    fruitEl.addEventListener('touchstart', cut);
 
-// Detect pointer or touch movement across the container and slice the fruit
-$("#container").on("mousemove touchmove", function(event) {
-    const x = event.pageX || event.touches?.[0]?.pageX;
-    const y = event.pageY || event.touches?.[0]?.pageY;
-    const fruit = $("#fruit");
-
-    if (fruit.is(":visible")) {
-        const offset = fruit.offset();
-        const w = fruit.width();
-        const h = fruit.height();
-
-        if (x >= offset.left && x <= offset.left + w &&
-            y >= offset.top && y <= offset.top + h) {
+    // Detect pointer or touch movement across the container and slice the fruit
+    const containerEl = document.getElementById("container");
+    const moveHandler = function(event) {
+        const x = event.pageX || (event.touches && event.touches[0]?.pageX);
+        const y = event.pageY || (event.touches && event.touches[0]?.pageY);
+        if (!isElementVisible(fruitEl)) return;
+        const rect = fruitEl.getBoundingClientRect();
+        if (x >= rect.left + window.scrollX && x <= rect.left + window.scrollX + rect.width &&
+            y >= rect.top + window.scrollY && y <= rect.top + window.scrollY + rect.height) {
             cut();
         }
-    }
+    };
+    containerEl.addEventListener('mousemove', moveHandler);
+    containerEl.addEventListener('touchmove', moveHandler);
 });
 
+
 function addHeart(){
-    $("#life").empty();
-    for(i=0;i<lives;i++){
-        $("#life").append(`<img src="images/heart.png" class="heart">`);
+    const lifeEl = document.getElementById("life");
+    lifeEl.innerHTML = "";
+    for(let i=0;i<lives;i++){
+        const img = document.createElement('img');
+        img.src = "images/heart.png";
+        img.className = "heart";
+        lifeEl.appendChild(img);
     }
+}
+
+function isElementVisible(el){
+    return window.getComputedStyle(el).display !== 'none';
 }
 
 function spawnNextFruit(){
@@ -106,25 +108,31 @@ function spawnNextFruit(){
     }
     dropSpeed = baseSpeed * difficulty;
     chooseFruit();
-    $("#fruit").css({"left" : Math.round(($("#container").width()-350)*Math.random())+200, "top" : -50});
-    $("#fruit").css({"display":"flex"});
+    const fruitEl = document.getElementById("fruit");
+    const containerEl = document.getElementById("container");
+    const left = Math.round((containerEl.offsetWidth - 350) * Math.random()) + 200;
+    fruitEl.style.left = left + "px";
+    fruitEl.style.top = "-50px";
+    fruitEl.style.display = "flex";
 }
 function startFruits(){
     spawnNextFruit();
     action = setInterval(function(){
-        $("#fruit").css("top", $("#fruit").position().top + dropSpeed);
-        if($("#fruit").position().top > $("#container").height()){
+        const fruitEl = document.getElementById("fruit");
+        const containerEl = document.getElementById("container");
+        fruitEl.style.top = (fruitEl.offsetTop + dropSpeed) + "px";
+        if(fruitEl.offsetTop > containerEl.offsetHeight){
             if(lives > 1 ){
                 spawnNextFruit();
                 lives-=1;
                 addHeart();
             }else{
                 isPlaying = false;
-                $("#liferem").css("display","none");
-                $("#fsc").text(score);
+                document.getElementById("liferem").style.display = "none";
+                document.getElementById("fsc").textContent = score;
                 lives-=1;
                 addHeart();
-                $("#endgame").show();
+                document.getElementById("endgame").style.display = "block";
                 stopAction();
             }
         }
@@ -133,7 +141,8 @@ function startFruits(){
 
 
 function chooseFruit(){
-    $("#fruit").attr('src' , 'images/' + fruits[Math.round(9*Math.random())] +'.png');
+    const fruitEl = document.getElementById("fruit");
+    fruitEl.src = 'images/' + fruits[Math.round(9*Math.random())] + '.png';
 }
 
 function stopAction(){
@@ -142,17 +151,16 @@ function stopAction(){
         db.ref().child("scores").set(highScore);
     }
     clearInterval(action);
-    $("#fruit").hide();
+    document.getElementById("fruit").style.display = "none";
 }
 
 function cut(){
     score++;
     hits++;
-    $("#value").html(score);
-    $("#slicesound")[0].play();
-    $("#fruit").hide("explode", 500); 
-    $("#fruit").css({'display':'flex'});
+    document.getElementById("value").textContent = score;
+    document.getElementById("slicesound").play();
+    document.getElementById("fruit").style.display = "none";
     clearInterval(action);
-    
+
     setTimeout(startFruits, baseDelay / difficulty);
 }
