@@ -10,6 +10,11 @@ var difficulty = 1;
 var baseSpeed = 1;
 var baseDelay = 800;
 
+// capture slice vectors for replay analytics
+var replayData = [];
+var lastPos = null;
+var currentVector = null;
+
 var fruits = ['apple', 'banana', 'grapes', 'mango', 'orange', 'peach', 'pear', 'pineapple','tomato','watermelon'];
 
 function getHighScore() {
@@ -30,6 +35,9 @@ function startGame(){
     isPlaying=true;
     score=0;
     dropSpeed=1;
+    replayData = [];
+    lastPos = null;
+    currentVector = null;
     $("#value").html(score);
     $("#menubar").hide();
     $("#endgame").hide();
@@ -78,6 +86,16 @@ $("#fruit").on("mouseover touchstart", cut);
 $("#container").on("mousemove touchmove", function(event) {
     const x = event.pageX || event.touches?.[0]?.pageX;
     const y = event.pageY || event.touches?.[0]?.pageY;
+    const now = Date.now();
+    if(lastPos){
+        const dt = now - lastPos.time;
+        const dx = x - lastPos.x;
+        const dy = y - lastPos.y;
+        const velocity = Math.sqrt(dx*dx + dy*dy) / Math.max(dt,1);
+        const direction = Math.atan2(dy, dx);
+        currentVector = [velocity, direction];
+    }
+    lastPos = {x, y, time: now};
     const fruit = $("#fruit");
 
     if (fruit.is(":visible")) {
@@ -143,9 +161,13 @@ function stopAction(){
     }
     clearInterval(action);
     $("#fruit").hide();
+    runAnalytics();
 }
 
 function cut(){
+    if(currentVector){
+        replayData.push(currentVector);
+    }
     score++;
     hits++;
     $("#value").html(score);
@@ -155,4 +177,21 @@ function cut(){
     clearInterval(action);
     
     setTimeout(startFruits, baseDelay / difficulty);
+}
+
+function runAnalytics(){
+    if(typeof tf === 'undefined' || replayData.length === 0){
+        return;
+    }
+    const xs = tf.tensor2d(replayData);
+    const ys = tf.ones([replayData.length, 1]);
+    const model = tf.sequential();
+    model.add(tf.layers.dense({units: 8, activation: 'relu', inputShape: [2]}));
+    model.add(tf.layers.dense({units: 1, activation: 'sigmoid'}));
+    model.compile({optimizer: 'adam', loss: 'binaryCrossentropy'});
+    model.fit(xs, ys, {epochs: 5}).then(() => {
+        model.predict(xs).data().then(p => {
+            console.log('Replay analytics:', Array.from(p));
+        });
+    });
 }

@@ -6,6 +6,9 @@
     "start": "http-server -p 8080",
     "test": "echo \"No test specified\" && exit 1"
   },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.2.0"
+  },
   "devDependencies": {
     "http-server": "^14.1.1"
   }
