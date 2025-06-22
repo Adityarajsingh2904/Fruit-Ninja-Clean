@@ -1,14 +1,18 @@
-var isPlaying=false;
-var score =0;
+var isPlaying = false;
+var score = 0;
 var lives;
-var dropSpeed=1;
+var dropSpeed = 1;
 var action;
-var highScore=0;
+var highScore = 0;
 var hits = 0;
 var totalSlices = 0;
 var difficulty = 1;
 var baseSpeed = 1;
 var baseDelay = 800;
+
+function isVisible(el) {
+    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+}
 
 // capture slice vectors for replay analytics
 var replayData = [];
@@ -32,58 +36,58 @@ function showHighScore(){
 }
 
 function startGame(){
-    isPlaying=true;
-    score=0;
-    dropSpeed=1;
+    isPlaying = true;
+    score = 0;
+    dropSpeed = 1;
     replayData = [];
     lastPos = null;
     currentVector = null;
-    $("#value").html(score);
-    $("#menubar").hide();
-    $("#endgame").hide();
-    $("#liferem").css("display","flex");
-    $("#container").css({"display":"flex"});
-    lives=3;
+    document.getElementById("value").innerHTML = score;
+    document.getElementById("menubar").style.display = "none";
+    document.getElementById("endgame").style.display = "none";
+    document.getElementById("liferem").style.display = "flex";
+    document.getElementById("container").style.display = "flex";
+    lives = 3;
     addHeart();
     startFruits();
 }
 
-$(function(){    
+document.addEventListener("DOMContentLoaded", function(){
     getHighScore();
 
-    $("#highScore").click(function(){
-        showHighScore();
-    });
-    $("#highScore1").click(function(){
-        showHighScore();
-    });
+    document.getElementById("highScore").addEventListener("click", showHighScore);
+    document.getElementById("highScore1").addEventListener("click", showHighScore);
 
-    $("#start").click(function(){
-        if(isPlaying==true){
+    document.getElementById("start").addEventListener("click", function(){
+        if(isPlaying === true){
             location.reload();
         } else {
             startGame();
         }
     });
-    
-    $("#restartGame").click(function(){
-        startGame();
-    });
 
-    $("#restart").click(function(){
+    document.getElementById("restartGame").addEventListener("click", startGame);
+
+    document.getElementById("restart").addEventListener("click", function(){
         location.reload();
     });
 
-    $("#toggleDark").click(function(){
-        $("body").toggleClass("dark");
+    document.getElementById("toggleDark").addEventListener("click", function(){
+        document.body.classList.toggle("dark");
     });
 });
 
 // support both mouse and touch interactions for slicing the fruit
-$("#fruit").on("mouseover touchstart", cut);
+var fruitEl = document.getElementById("fruit");
+fruitEl.addEventListener("mouseover", cut);
+fruitEl.addEventListener("touchstart", cut);
 
 // Detect pointer or touch movement across the container and slice the fruit
-$("#container").on("mousemove touchmove", function(event) {
+var containerEl = document.getElementById("container");
+containerEl.addEventListener("mousemove", handleMove);
+containerEl.addEventListener("touchmove", handleMove);
+
+function handleMove(event){
     const x = event.pageX || event.touches?.[0]?.pageX;
     const y = event.pageY || event.touches?.[0]?.pageY;
     const now = Date.now();
@@ -96,24 +100,28 @@ $("#container").on("mousemove touchmove", function(event) {
         currentVector = [velocity, direction];
     }
     lastPos = {x, y, time: now};
-    const fruit = $("#fruit");
+    if (isVisible(fruitEl)) {
+        const rect = fruitEl.getBoundingClientRect();
+        const offsetX = rect.left + window.pageXOffset;
+        const offsetY = rect.top + window.pageYOffset;
+        const w = rect.width;
+        const h = rect.height;
 
-    if (fruit.is(":visible")) {
-        const offset = fruit.offset();
-        const w = fruit.width();
-        const h = fruit.height();
-
-        if (x >= offset.left && x <= offset.left + w &&
-            y >= offset.top && y <= offset.top + h) {
+        if (x >= offsetX && x <= offsetX + w &&
+            y >= offsetY && y <= offsetY + h) {
             cut();
         }
     }
-});
+}
 
 function addHeart(){
-    $("#life").empty();
-    for(i=0;i<lives;i++){
-        $("#life").append(`<img src="images/heart.png" class="heart">`);
+    var lifeEl = document.getElementById("life");
+    lifeEl.innerHTML = "";
+    for (var i = 0; i < lives; i++) {
+        var img = document.createElement("img");
+        img.src = "images/heart.png";
+        img.className = "heart";
+        lifeEl.appendChild(img);
     }
 }
 
@@ -124,25 +132,27 @@ function spawnNextFruit(){
     }
     dropSpeed = baseSpeed * difficulty;
     chooseFruit();
-    $("#fruit").css({"left" : Math.round(($("#container").width()-350)*Math.random())+200, "top" : -50});
-    $("#fruit").css({"display":"flex"});
+    var containerWidth = containerEl.clientWidth;
+    fruitEl.style.left = Math.round((containerWidth - 350) * Math.random()) + 200 + "px";
+    fruitEl.style.top = "-50px";
+    fruitEl.style.display = "flex";
 }
 function startFruits(){
     spawnNextFruit();
     action = setInterval(function(){
-        $("#fruit").css("top", $("#fruit").position().top + dropSpeed);
-        if($("#fruit").position().top > $("#container").height()){
+        fruitEl.style.top = (fruitEl.offsetTop + dropSpeed) + "px";
+        if(fruitEl.offsetTop > containerEl.offsetHeight){
             if(lives > 1 ){
                 spawnNextFruit();
                 lives-=1;
                 addHeart();
             }else{
                 isPlaying = false;
-                $("#liferem").css("display","none");
-                $("#fsc").text(score);
+                document.getElementById("liferem").style.display = "none";
+                document.getElementById("fsc").textContent = score;
                 lives-=1;
                 addHeart();
-                $("#endgame").show();
+                document.getElementById("endgame").style.display = "block";
                 stopAction();
             }
         }
@@ -151,7 +161,7 @@ function startFruits(){
 
 
 function chooseFruit(){
-    $("#fruit").attr('src' , 'images/' + fruits[Math.round(9*Math.random())] +'.png');
+    fruitEl.src = 'images/' + fruits[Math.round(9 * Math.random())] + '.png';
 }
 
 function stopAction(){
@@ -160,7 +170,7 @@ function stopAction(){
         db.ref().child("scores").set(highScore);
     }
     clearInterval(action);
-    $("#fruit").hide();
+    fruitEl.style.display = "none";
     runAnalytics();
 }
 
@@ -170,12 +180,11 @@ function cut(){
     }
     score++;
     hits++;
-    $("#value").html(score);
-    $("#slicesound")[0].play();
-    $("#fruit").hide("explode", 500); 
-    $("#fruit").css({'display':'flex'});
+    document.getElementById("value").innerHTML = score;
+    document.getElementById("slicesound").play();
+    fruitEl.style.display = "none";
     clearInterval(action);
-    
+
     setTimeout(startFruits, baseDelay / difficulty);
 }
 
