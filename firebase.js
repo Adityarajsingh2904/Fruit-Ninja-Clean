@@ -1,4 +1,4 @@
-const firebaseConfig = {
+const firebaseConfig = window.FIREBASE_CONFIG || {
   apiKey: "AIzaSyAw2CIQwGddayi1XUY2Qlc7zZFB3hVburY",
   authDomain: "fruit-ninja-cb70e.firebaseapp.com",
   databaseURL: "https://fruit-ninja-cb70e-default-rtdb.firebaseio.com",
