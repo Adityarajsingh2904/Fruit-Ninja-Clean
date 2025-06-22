@@ -3,15 +3,11 @@
   "version": "1.0.0",
   "description": "Fruit Ninja game using HTML, CSS and JavaScript",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "node server.js",
     "test": "echo \"No test specified\" && exit 1",
-    "lint": "eslint .",
-    "build": "parcel build index.html"
+    "lint": "echo \"No lint step\"",
+    "build": "echo \"No build step\""
   },
-  "dependencies": {
-    "@tensorflow/tfjs": "^4.2.0"
-  },
-  "devDependencies": {
-    "http-server": "^14.1.1"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
