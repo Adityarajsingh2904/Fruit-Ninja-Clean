@@ -61,14 +61,13 @@ You may also open `index.html` directly, though some browsers restrict certain f
 /
 ├── audio/          # Sound effects
 ├── images/         # Fruit sprites and background assets
-├── jquery.js       # Main game logic
-├── jquery.min.js   # Minified game script
+├── scripts/        # Game logic (currently minimal)
 ├── styling.css     # Styles for the game
 ├── server.js       # Simple Node.js server for local play
 └── firebase.js     # Firebase configuration
 ```
 
-The heart of the game lives in `jquery.js` (or the minified `jquery.min.js`). This script handles fruit spawning, slicing detection, and score tracking.
+The heart of the game will live in `scripts/main.js`. Right now it only contains placeholder code, but this is where fruit spawning, slicing detection, and score tracking will eventually reside.
 
 ## Deployment
 
