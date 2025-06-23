@@ -18,7 +18,16 @@ const mimeTypes = {
 };
 
 http.createServer((req, res) => {
-  let filePath = path.join(root, req.url === '/' ? '/index.html' : req.url);
+  const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
+  const requestedPath = parsedUrl.pathname === '/' ? 'index.html' : parsedUrl.pathname;
+  let filePath = path.normalize(path.join(root, requestedPath));
+
+  if (!filePath.startsWith(root)) {
+    res.statusCode = 403;
+    res.end('Forbidden');
+    return;
+  }
+
   fs.readFile(filePath, (err, data) => {
     if (err) {
       res.statusCode = 404;
