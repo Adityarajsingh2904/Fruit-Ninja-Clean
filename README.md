@@ -35,7 +35,7 @@ Scores can be saved to Firebase when configured.
    cd Fruit-Ninja-Clean
    ```
 
-2. Install dependencies for the optional server
+2. (Optional) Install dependencies if you plan to add any later
 
    ```bash
    npm install
@@ -47,6 +47,8 @@ Launch the provided HTTP server with:
 
 ```bash
 npm start
+# or
+npm run dev
 ```
 
 This runs `node server.js` and serves the game at `http://localhost:8080/`.
