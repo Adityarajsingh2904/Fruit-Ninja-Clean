@@ -51,7 +51,7 @@ This executes `node server.js` and serves the game at
 ```
 The core gameplay logic lives in `scripts/` (currently minimal).
 
-## Customizing
+
 
 Color variables and dark mode definitions are at the top of
 `styling.css`. Adjust them to change the look and feel. You can also
