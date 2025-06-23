@@ -51,7 +51,9 @@ window.onload = function () {
 
   function spawnFruit() {
     const img = new Image();
-    img.src = "images/" + fruitImages[Math.floor(Math.random() * fruitImages.length)];
+    // randomly pick an image for the fruit
+    img.src =
+      "images/" + fruitImages[Math.floor(Math.random() * fruitImages.length)];
     const radius = 30;
     const x = Math.random() * (canvas.width - radius * 2) + radius;
     const y = canvas.height + radius;
