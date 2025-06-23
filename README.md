@@ -1,92 +1,68 @@
 # Fruit Ninja Clean
 
-This project contains a simplified web-based fruit slicing game that mimics the classic Fruit Ninja.
-It uses HTML5 Canvas for rendering and Firebase for optional high-score storage.
+A lightweight take on the classic fruit slicing game. This project uses
+HTML5 Canvas and vanilla JavaScript to render fruit that can be cut with a
+mouse swipe. A small Node server is included for convenient local testing
+and Firebase can optionally store high scores.
 
-## Table of Contents
-- [Preview](#preview)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the development server](#running-the-development-server)
-- [Project structure](#project-structure)
-- [Deployment](#deployment)
-- [Customization](#customization)
+## Contents
+- [Getting Started](#getting-started)
+- [Running the Server](#running-the-server)
+- [Project Layout](#project-layout)
+- [Customizing](#customizing)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Preview
+## Getting Started
 
-Open `index.html` in a browser or start the local server to try a very basic version of the game.
-Fruits appear on screen and you can slice them by dragging the mouse across them.
-Scores can be saved to Firebase when configured.
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) 12+ (only needed for the Node server)
-- Internet connection to load external libraries (jQuery, Firebase, etc.)
-- A Firebase project if you want to enable online high scores
-
-## Installation
-
-1. Clone the repository
-
+1. **Clone the repository**
    ```bash
    git clone <repository-url>
    cd Fruit-Ninja-Clean
    ```
-
-2. (Optional) Install dependencies if you plan to add any later
-
+2. **(Optional) Install dependencies**
+   The game currently has no third‑party packages but you may run:
    ```bash
    npm install
    ```
+   if you plan on adding some later.
 
-## Running the development server
+The game files can be opened directly in a browser, but using the provided
+server avoids security restrictions that some browsers impose on local files.
 
-Launch the provided HTTP server with:
+## Running the Server
 
+Start the development server with:
 ```bash
 npm start
-# or
-npm run dev
 ```
+This executes `node server.js` and serves the game at
+`http://localhost:8080/`. Visit that address in your browser to play.
 
-This runs `node server.js` and serves the game at `http://localhost:8080/`.
-Open that address in your browser to play.
-You may also open `index.html` directly, though some browsers restrict certain features when loading a file from disk.
-
-## Project structure
-
+## Project Layout
 ```
 /
 ├── audio/          # Sound effects
-├── images/         # Fruit sprites and background assets
-├── scripts/        # Game logic (currently minimal)
-├── styling.css     # Styles for the game
-├── server.js       # Simple Node.js server for local play
-└── firebase.js     # Firebase configuration
+├── images/         # Graphics
+├── firebase.js     # Firebase setup
+├── server.js       # Simple HTTP server
+├── styling.css     # Game styles
+└── index.html      # Main page
 ```
+The core gameplay logic lives in `scripts/` (currently minimal).
 
-The heart of the game will live in `scripts/main.js`. Right now it only contains placeholder code, but this is where fruit spawning, slicing detection, and score tracking will eventually reside.
+## Customizing
 
-## Deployment
-
-For a static deployment, host all the files on any web server. Make sure
-`firebase.js` points to your own Firebase project if you want to use the real-time database.
-
-On a Node-capable host, copy the repository and run `node server.js`. Set the
-`PORT` environment variable if you need the server to listen on a different port.
-
-## Customization
-
-Color variables and dark-mode styles are defined at the top of `styling.css`.
-Adjust these values to tweak the appearance of the game.
-You can also replace the images in `images/` with your own assets as long as the filenames match.
+Color variables and dark mode definitions are at the top of
+`styling.css`. Adjust them to change the look and feel. You can also
+replace images in `images/` with your own assets as long as the file names
+match.
 
 ## Contributing
 
-Contributions and feature requests are welcome. Feel free to open issues or submit a pull request.
+Pull requests and suggestions are welcome. Feel free to open an issue if
+you find a bug or have an idea for improvement.
 
 ## License
 
-MIT
+This project is available under the MIT license.
