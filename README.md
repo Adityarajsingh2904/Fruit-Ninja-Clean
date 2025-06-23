@@ -31,7 +31,7 @@ Scores can be saved to Firebase when configured.
 1. Clone the repository
 
    ```bash
-   git clone <repo>
+   git clone <repository-url>
    cd Fruit-Ninja-Clean
    ```
 
