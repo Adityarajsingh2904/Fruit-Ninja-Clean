@@ -161,7 +161,7 @@ function startFruits(){
 
 
 function chooseFruit(){
-    fruitEl.src = 'images/' + fruits[Math.round(9 * Math.random())] + '.png';
+    fruitEl.src = 'images/' + fruits[Math.floor(fruits.length * Math.random())] + '.png';
 }
 
 function stopAction(){
