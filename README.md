@@ -79,11 +79,12 @@ On a Node-capable host, copy the repository and run `node server.js`. Set the
 
 ### GitHub Pages
 
-This repository contains a workflow that automatically publishes the game to
-GitHub Pages whenever changes are pushed to the `main` branch. To enable it,
-open your repository's settings, activate GitHub Pages and select the
-"GitHub Actions" source. The site will then be available at
-`https://<username>.github.io/<repository>` after each push.
+This repository includes a GitHub Actions workflow that publishes the game to
+GitHub Pages. It runs automatically on every push to the `main` branch or when
+manually triggered from the Actions tab. To enable it, open your repository's
+settings, activate GitHub Pages and select the "GitHub Actions" source. After
+each run the site will be available at
+`https://<username>.github.io/<repository>`.
 
 ## Customization
 
