@@ -4,12 +4,11 @@
   "description": "Fruit Ninja game using HTML, CSS and JavaScript",
   "scripts": {
     "start": "node server.js",
+    "dev": "node server.js",
     "test": "echo \"No test specified\" && exit 1",
     "lint": "echo \"No lint step\"",
     "build": "echo \"No build step\""
   },
-  "dependencies": {
-    "http-server": "^14.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }
