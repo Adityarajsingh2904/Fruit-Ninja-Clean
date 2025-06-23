@@ -109,10 +109,14 @@ window.onload = function () {
   }
 
   function startGame() {
+    // show container before measuring dimensions
+    container.style.display = "flex";
     if (!canvas) {
       initCanvas();
+    } else {
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
     }
-    container.style.display = "flex";
     score = 0;
     scoreEl.textContent = score;
     fruits = [];
