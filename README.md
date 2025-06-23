@@ -77,6 +77,14 @@ For a static deployment, host all the files on any web server. Make sure
 On a Node-capable host, copy the repository and run `node server.js`. Set the
 `PORT` environment variable if you need the server to listen on a different port.
 
+### GitHub Pages
+
+This repository contains a workflow that automatically publishes the game to
+GitHub Pages whenever changes are pushed to the `main` branch. To enable it,
+open your repository's settings, activate GitHub Pages and select the
+"GitHub Actions" source. The site will then be available at
+`https://<username>.github.io/<repository>` after each push.
+
 ## Customization
 
 Color variables and dark-mode styles are defined at the top of `styling.css`.
